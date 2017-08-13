@@ -14,6 +14,7 @@ public class NativeMemory {
     public static native void c_leek();
     public static native void c_leek_recycled();
     public static native void native_oom(int count);
+    public static native void native_malloc(int mb);
 
     /**
      * when count=0 approaching to 512:
@@ -23,4 +24,5 @@ public class NativeMemory {
     public static native void local_ref_jclass_recycled(int count);
     public static native void local_ref_jmethodId(int count);
 
+    public static native void new_object_array(int count);
 }

@@ -45,6 +45,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="native_locref"
+                android:text="native_malloc" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="native_locref"
                 android:text="local_ref_jclass" />
             <Button
                 android:layout_width="wrap_content"
@@ -57,6 +62,11 @@
                 android:layout_height="wrap_content"
                 android:onClick="native_locref"
                 android:text="local_ref_jmethodId" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="native_locref"
+                android:text="new_object_array" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

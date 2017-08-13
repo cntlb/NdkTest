@@ -8,10 +8,9 @@
 
 #define LOGE(fmt, argv...) __android_log_print(ANDROID_LOG_ERROR, "native-lib.cpp", fmt, ##argv);
 
-
-
-
+#ifdef __cplusplus
 extern "C" {
+#endif
 JNIEXPORT void JNICALL
 Java_com_example_ndktest_NativeMemory_c_1leek(JNIEnv *env, jclass type) {
 
@@ -33,8 +32,16 @@ Java_com_example_ndktest_NativeMemory_native_1oom(JNIEnv *env, jclass type, jint
     jstring str;
     env->PushLocalFrame(1000);
     for (int i = 0; i < count; ++i) {
-        str = env->NewStringUTF("hello");
+        str = env->NewStringUTF("0");
     }
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_ndktest_NativeMemory_native_1malloc(JNIEnv *env, jclass type, jint mb) {
+    //dynamic alloc memory mb * 1024 * 1024 bytes in heep
+    void *ptr = malloc(mb * 1024 * 1024);
+    //release
+    delete(ptr);
 }
 
 JNIEXPORT void JNICALL
@@ -62,6 +69,19 @@ Java_com_example_ndktest_NativeMemory_local_1ref_1jmethodId(JNIEnv *env, jclass 
 }
 
 
+JNIEXPORT void JNICALL
+Java_com_example_ndktest_NativeMemory_new_1object_1array(JNIEnv *env, jclass type, jint count) {
+    jclass stringClass = env->FindClass("java/lang/String");
+    jstring hello = env->NewStringUTF("hello");
+    for (int i = 0; i < count; ++i) {
+        jobjectArray array = env->NewObjectArray(5, stringClass, hello);
+        //do sth
+        env->DeleteLocalRef(array);
+    }
+    env->DeleteLocalRef(hello);
+    env->DeleteLocalRef(stringClass);
+}
+
 JNIEXPORT jstring JNICALL
 Java_com_example_ndktest_MainActivity_stringFromJNI(
         JNIEnv *env,
@@ -69,4 +89,7 @@ Java_com_example_ndktest_MainActivity_stringFromJNI(
     std::string hello = "Hello from C++";
     return env->NewStringUTF(hello.c_str());
 }
+
+#ifdef __cplusplus
 }
+#endif
