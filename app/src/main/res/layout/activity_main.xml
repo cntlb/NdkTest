@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.ndktest.MainActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.example.ndktest.MainActivity">
 
     <EditText
         android:id="@+id/count"
@@ -13,60 +13,163 @@
         android:layout_height="wrap_content"
         android:hint="调用次数"
         android:inputType="number"
-        android:textSize="28sp" />
+        android:textSize="28sp"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <Button
+            <TextView
+                android:id="@+id/source_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="native_heep"
-                android:text="c_leek" />
+                android:layout_gravity="right"
+                android:text="[view source code]"
+                android:textColor="@android:color/holo_blue_bright"
+                android:textSize="16sp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="内存相关"
+                android:textColor="@android:color/darker_gray"
+                />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="native_heep"
-                android:text="c_leek_recycled" />
+                android:text="c_leek"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="native_heep"
+                android:text="c_leek_recycled"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="native_locref"
-                android:text="native_oom" />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="native_locref"
-                android:text="native_malloc" />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="native_locref"
-                android:text="local_ref_jclass" />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="native_locref"
-                android:text="local_ref_jclass_recycled" />
+                android:text="native_oom"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="native_locref"
-                android:text="local_ref_jmethodId" />
+                android:text="java_alloc(mega byte)"/>
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="native_locref"
-                android:text="new_object_array" />
+                android:text="native_malloc(mega byte)"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="常见的Local Reference"
+                android:textColor="@android:color/darker_gray"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="native_locref"
+                android:text="local_ref_jclass"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="native_locref"
+                android:text="local_ref_jclass_recycled"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="native_locref"
+                android:text="local_ref_jmethodId"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="native_locref"
+                android:text="new_object_array"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="more examples"
+                android:textColor="@android:color/darker_gray"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="native_more"
+                android:text="no_delete_local_ref(refCount)"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="native_more"
+                android:text="delete_local_ref"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="native_more"
+                android:text="call_java_void_method(invokeCount)"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="native_more"
+                android:text="call_java_object_method(invokeCount)"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="native_more"
+                android:text="call_java_object_method_recycled"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="native_more"
+                android:text="call_java_void_method_param"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="native_more"
+                android:text="call_java_void_method_param_recycled"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="native_string"
+                android:text="java_pass_param(string,count)"/>
+
+
         </LinearLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/log_text"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@android:color/black"
+        android:scrollbars="vertical"
+        android:textColor="@android:color/holo_green_dark"/>
 </LinearLayout>
