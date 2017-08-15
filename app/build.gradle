@@ -43,11 +43,13 @@ task ndkBuild(type: Exec, description: 'Compile JNI source via NDK') {
     Properties properties = new Properties()
     properties.load(stream)
     def ndkDir = properties.get('ndk.dir')
+    def ndkPathName = new File(ndkDir, 'ndk-build').absolutePath
+    if(new File(ndkDir, 'ndk-build.cmd').exists()){//windows
+        ndkPathName += '.cmd'
+    }
 
-    def cmd = ["$ndkDir/ndk-build", "NDK_PROJECT_PATH=$projectDir",  "NDK_DEBUG=1",
+    def cmd = ["$ndkPathName", "NDK_PROJECT_PATH=$projectDir",  "NDK_DEBUG=1",
                "APP_BUILD_SCRIPT=$androidMK", "NDK_APPLICATION_MK=$applicationMK"]
-
-    // commandLine  'ndk-build.cmd', '-C', file('src/main').absolutePath;
 
     println(cmd)
     commandLine cmd
